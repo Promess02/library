@@ -1,7 +1,8 @@
-import java.sql.Date;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class RentalRegistry {
     private List<Rental> rentalList;
@@ -20,11 +21,19 @@ public class RentalRegistry {
         return sum;
     }
 
-    public Rental addRental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn){
-        Rental rental = new Rental(rentalNumber,reader,bookCopy,dateOfRental,dateOfReturn);
+    public Rental addRental(Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn){
+        Rental rental = new Rental(rentalList.size()+1,reader,bookCopy,dateOfRental,dateOfReturn);
         rentalList.add(rental);
         return rental;
     }
+
+    public void updateDateOfReturn(Integer rentalNumber, Date date){
+        rentalList.stream()
+                .filter(rental -> rental.getRentalNumber().equals(rentalNumber) || rental.getDateOfReturn().isEmpty())
+                .findFirst()
+                .ifPresent(rental -> rental.setDateOfReturn(date));
+    }
+
 
     public Integer getNumberOfOverdueRentals(){
         int sum = 0;
@@ -35,4 +44,21 @@ public class RentalRegistry {
         return sum;
     }
 
+    public List<Rental> getRentalList(){
+        return rentalList;
+    }
+
+    public Rental getRentalById(Integer rentalId){
+        for(Rental rental: rentalList){
+            if(rental.getRentalNumber().equals(rentalId)) return rental;
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "RentalRegistry{" +
+                "rentalList=" + rentalList +
+                '}';
+    }
 }

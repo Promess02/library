@@ -1,4 +1,4 @@
-import java.sql.Date;
+import java.util.Date;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -16,7 +16,7 @@ public class Rental{
         this.bookCopy = bookCopy;
         this.dateOfRental = dateOfRental;
         this.dateOfReturn = dateOfReturn;
-        this.penalty = Optional.empty();
+        this.penalty = Optional.ofNullable(null);
     }
     public BookCopy getBookCopy() {
         return bookCopy;
@@ -81,5 +81,23 @@ public class Rental{
 
         if(monthsDiff>0) penalty = Optional.of(monthsDiff*Utils.penaltyForMonth);
         else penalty = Optional.empty();
+    }
+
+    @Override
+    public String toString() {
+        String dateOfReturntoString;
+        String penaltyToString;
+        if(dateOfReturn.isEmpty()) dateOfReturntoString = "null";
+        else dateOfReturntoString = dateOfReturn.toString();
+        if(penalty.isEmpty()) penaltyToString = "null";
+        else penaltyToString = penalty.toString();
+        return "Rental{" +
+                "rentalNumber=" + rentalNumber +
+                ", reader=" + reader +
+                ", bookCopy=" + bookCopy +
+                ", dateOfRental=" + dateOfRental +
+                ", dateOfReturn=" + dateOfReturntoString +
+                ", penalty=" + penaltyToString +
+                '}';
     }
 }

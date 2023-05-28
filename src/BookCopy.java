@@ -4,6 +4,14 @@ public class BookCopy extends Book{
         private Integer catalogNumber;
         private RentalStatus rentalStatus;
 
+        @Override
+        public String toString() {
+                return "BookCopy{" +
+                        "catalogNumber=" + catalogNumber +
+                        ", rentalStatus=" + rentalStatus +
+                        '}';
+        }
+
         public void setRentalStatus(RentalStatus rentalStatus) {
                 this.rentalStatus = rentalStatus;
         }
