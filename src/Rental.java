@@ -3,11 +3,10 @@ import java.util.Calendar;
 import java.util.Optional;
 
 public class Rental{
-    private Integer rentalNumber;
-    private Reader reader;
-    private BookCopy bookCopy;
-    private Date dateOfRental;
-
+    final private Integer rentalNumber;
+    final private Reader reader;
+    final private BookCopy bookCopy;
+    final private Date dateOfRental;
     private Optional<Date> dateOfReturn;
     private Optional<Float> penalty;
     public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn) {
@@ -37,10 +36,6 @@ public class Rental{
         return dateOfRental;
     }
 
-    public void setDateOfRental(Date dateOfRental) {
-        this.dateOfRental = dateOfRental;
-    }
-
     public Optional<Date> getDateOfReturn() {
         return dateOfReturn;
     }
@@ -50,16 +45,16 @@ public class Rental{
     }
 
 
-    public void countPenalty(){
-        if(dateOfReturn.isEmpty()){
-            System.out.println("Not able to count penalty, because the book hasn't been returned yet");
-            return;
-        }
+    public void countPenalty(Date date){
+        Date finalDate;
+        if(dateOfReturn.isEmpty()) finalDate = date;
+        else finalDate = dateOfReturn.get();
+
         Calendar calendar1 = Calendar.getInstance();
         calendar1.setTime(dateOfRental);
 
         Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(dateOfReturn.get());
+        calendar2.setTime(finalDate);
 
         // Extract year and month values
         int year1 = calendar1.get(Calendar.YEAR);

@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class RentalRegistry {
+public class RentalRegistry implements Registry{
     private List<Rental> rentalList;
 
     public RentalRegistry() {
@@ -34,25 +36,20 @@ public class RentalRegistry {
                 .ifPresent(rental -> rental.setDateOfReturn(date));
     }
 
-
-    public Integer getNumberOfOverdueRentals(){
-        int sum = 0;
+    public LinkedList<Rental> getListOfOverdueRentals(){
+        LinkedList<Rental> overdueRentals = new LinkedList<>();
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+        LocalDate localDate = LocalDate.now();
+        Date dateNow = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         for(Rental rental: rentalList){
-            rental.countPenalty();
-            if(rental.getPenalty().isPresent()) sum++;
+            rental.countPenalty(dateNow);
+            if(rental.getPenalty().isPresent()) overdueRentals.add(rental);
         }
-        return sum;
+        return overdueRentals;
     }
 
     public List<Rental> getRentalList(){
         return rentalList;
-    }
-
-    public Rental getRentalById(Integer rentalId){
-        for(Rental rental: rentalList){
-            if(rental.getRentalNumber().equals(rentalId)) return rental;
-        }
-        return null;
     }
 
     @Override
@@ -60,5 +57,21 @@ public class RentalRegistry {
         return "RentalRegistry{" +
                 "rentalList=" + rentalList +
                 '}';
+    }
+
+    @Override
+    public Rental getEntryById(Integer id) {
+        for(Rental rental: rentalList){
+        if(rental.getRentalNumber().equals(id)) return rental;
+    }
+        return null;
+    }
+
+    @Override
+    public void deleteEntryById(Integer id) {
+        rentalList.stream()
+                .filter( reader -> reader.getRentalNumber().equals(id))
+                .findFirst()
+                .ifPresent(reader -> rentalList.remove(reader));
     }
 }

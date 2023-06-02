@@ -7,6 +7,8 @@ abstract public class Book{
     protected Date publishingDate;
     protected String bookAuthor;
 
+    protected BookCategory bookCategory;
+
     public Integer getIsbn() {
         return isbn;
     }
@@ -27,11 +29,20 @@ abstract public class Book{
         return bookAuthor;
     }
 
-    public Book(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor) {
+    public BookCategory getBookCategory() {
+        return bookCategory;
+    }
+
+    public void setBookCategory(BookCategory bookCategory) {
+        this.bookCategory = bookCategory;
+    }
+
+    public Book(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor, BookCategory bookCategory) {
         this.isbn = isbn;
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.publishingDate = publishingDate;
         this.bookAuthor = bookAuthor;
+        this.bookCategory = bookCategory;
     }
 }

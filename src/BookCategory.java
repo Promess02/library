@@ -1,0 +1,3 @@
+public enum BookCategory {
+    FANTASY, HORROR, SCIENCE_FICTION, ROMANCE, BIOGRAPHY, SCIENCE, ART
+}
