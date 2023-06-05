@@ -10,7 +10,6 @@ public class BookCopy extends Book implements Serializable {
                 return "BookCopy{" +
                         "catalogNumber=" + catalogNumber +
                         ", rentalStatus=" + rentalStatus +
-                        ", isbn=" + isbn +
                         ", title='" + title + '\'' +
                         ", publishingHouse='" + publishingHouse + '\'' +
                         ", publishingDate=" + publishingDate +
@@ -31,8 +30,8 @@ public class BookCopy extends Book implements Serializable {
                 return rentalStatus;
         }
 
-        public BookCopy(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor, Integer catalogNumber, RentalStatus rentalStatus, BookCategory bookCategory) {
-                super(isbn, title, publishingHouse, publishingDate, bookAuthor, bookCategory);
+        public BookCopy(String title, String publishingHouse, Date publishingDate, String bookAuthor, Integer catalogNumber, RentalStatus rentalStatus, BookCategory bookCategory) {
+                super(title, publishingHouse, publishingDate, bookAuthor, bookCategory);
                 this.catalogNumber = catalogNumber;
                 this.rentalStatus = rentalStatus;
         }

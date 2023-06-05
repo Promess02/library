@@ -8,19 +8,26 @@ public class Rental implements Serializable {
     final private Reader reader;
     final private BookCopy bookCopy;
     final private Date dateOfRental;
+    final private Integer timeOfRental;
     private SerializableOptional<Date> dateOfReturn;
     private SerializableOptional<Float> penalty;
-    public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn) {
+    public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Integer timeOfRental, Date dateOfRental) {
         this.rentalNumber = rentalNumber;
         this.reader = reader;
         this.bookCopy = bookCopy;
         this.dateOfRental = dateOfRental;
-        this.dateOfReturn = new SerializableOptional<>(dateOfReturn);
+        this.timeOfRental = timeOfRental;
+        this.dateOfReturn = new SerializableOptional<>(Optional.empty());
         this.penalty = new SerializableOptional<>(Optional.empty());
     }
     public BookCopy getBookCopy() {
         return bookCopy;
     }
+
+    public Integer getTimeOfRental() {
+        return timeOfRental;
+    }
+
     public Integer getRentalNumber() {
         return rentalNumber;
     }
@@ -75,7 +82,7 @@ public class Rental implements Serializable {
             monthsDiff--;
         }
 
-        if(monthsDiff>0) penalty.set(monthsDiff*Utils.penaltyForMonth);
+        if(monthsDiff>timeOfRental) penalty.set((monthsDiff-timeOfRental)*Utils.penaltyForMonth);
         else penalty.set(null);
     }
 

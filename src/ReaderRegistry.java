@@ -42,4 +42,12 @@ public class ReaderRegistry implements Registry, Serializable {
                 .findFirst()
                 .ifPresent(reader -> readerList.remove(reader));
     }
+
+    @Override
+    public boolean checkIfcontainsID(Integer id) {
+        for(Reader reader: readerList){
+            if(reader.getReaderId().equals(id)) return true;
+        }
+        return false;
+    }
 }

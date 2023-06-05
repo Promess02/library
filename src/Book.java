@@ -2,17 +2,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 abstract public class Book implements Serializable {
-    protected Integer isbn;
     protected String title;
     protected String publishingHouse;
     protected Date publishingDate;
     protected String bookAuthor;
 
     protected BookCategory bookCategory;
-
-    public Integer getIsbn() {
-        return isbn;
-    }
 
     public String getTitle() {
         return title;
@@ -38,8 +33,7 @@ abstract public class Book implements Serializable {
         this.bookCategory = bookCategory;
     }
 
-    public Book(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor, BookCategory bookCategory) {
-        this.isbn = isbn;
+    public Book(String title, String publishingHouse, Date publishingDate, String bookAuthor, BookCategory bookCategory) {
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.publishingDate = publishingDate;

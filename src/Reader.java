@@ -6,6 +6,15 @@ public class Reader implements Serializable {
     private String surname;
     private String login;
     private String password;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     public Reader(Integer readerId, String name, String surname, String login, String password) {
         ReaderId = readerId;
         this.name = name;
@@ -13,6 +22,7 @@ public class Reader implements Serializable {
         this.login = login;
         this.password = password;
     }
+
 
     public Integer getReaderId() {
         return ReaderId;

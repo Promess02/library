@@ -11,12 +11,12 @@ public class BookCopyRegistry implements Registry, Serializable {
         bookCopyList = new LinkedList<>();
     }
 
-    public void addBookCopy(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor, RentalStatus rentalStatus, BookCategory bookCategory){
-        BookCopy bookCopy = new BookCopy(isbn, title,publishingHouse,publishingDate, bookAuthor, bookCopyList.size()+1, rentalStatus, bookCategory);
+    public void addBookCopy(String title, String publishingHouse, Date publishingDate, String bookAuthor, RentalStatus rentalStatus, BookCategory bookCategory){
+        BookCopy bookCopy = new BookCopy(title,publishingHouse,publishingDate, bookAuthor, bookCopyList.size()+1, rentalStatus, bookCategory);
         bookCopyList.add(bookCopy);
     }
-    public BookCopy addBookCopyAndReturn(Integer isbn, String title, String publishingHouse, Date publishingDate, String bookAuthor, RentalStatus rentalStatus, BookCategory bookCategory){
-        BookCopy bookCopy = new BookCopy(isbn, title,publishingHouse,publishingDate, bookAuthor, bookCopyList.size()+1, rentalStatus, bookCategory);
+    public BookCopy addBookCopyAndReturn(String title, String publishingHouse, Date publishingDate, String bookAuthor, RentalStatus rentalStatus, BookCategory bookCategory){
+        BookCopy bookCopy = new BookCopy(title,publishingHouse,publishingDate, bookAuthor, bookCopyList.size()+1, rentalStatus, bookCategory);
         bookCopyList.add(bookCopy);
         return bookCopy;
     }
@@ -51,5 +51,18 @@ public class BookCopyRegistry implements Registry, Serializable {
                 .ifPresent(rental -> bookCopyList.remove(rental));
     }
 
+    @Override
+    public boolean checkIfcontainsID(Integer id) {
+        for(BookCopy bookCopy: bookCopyList){
+            if(bookCopy.getCatalogNumber().equals(id)) return true;
+        }
+        return false;
+    }
 
+    @Override
+    public String toString() {
+        return "BookCopyRegistry{" +
+                "bookCopyList=" + bookCopyList +
+                '}';
+    }
 }
