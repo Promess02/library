@@ -1,21 +1,22 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.Optional;
 
-public class Rental{
+public class Rental implements Serializable {
     final private Integer rentalNumber;
     final private Reader reader;
     final private BookCopy bookCopy;
     final private Date dateOfRental;
-    private Optional<Date> dateOfReturn;
-    private Optional<Float> penalty;
+    private SerializableOptional<Date> dateOfReturn;
+    private SerializableOptional<Float> penalty;
     public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn) {
         this.rentalNumber = rentalNumber;
         this.reader = reader;
         this.bookCopy = bookCopy;
         this.dateOfRental = dateOfRental;
-        this.dateOfReturn = dateOfReturn;
-        this.penalty = Optional.ofNullable(null);
+        this.dateOfReturn = new SerializableOptional<>(dateOfReturn);
+        this.penalty = new SerializableOptional<>(Optional.empty());
     }
     public BookCopy getBookCopy() {
         return bookCopy;
@@ -28,7 +29,7 @@ public class Rental{
         return reader;
     }
 
-    public Optional<Float> getPenalty() {
+    public SerializableOptional<Float> getPenalty() {
         return penalty;
     }
 
@@ -36,18 +37,18 @@ public class Rental{
         return dateOfRental;
     }
 
-    public Optional<Date> getDateOfReturn() {
+    public SerializableOptional<Date> getDateOfReturn() {
         return dateOfReturn;
     }
 
     public void setDateOfReturn(Date dateOfReturn) {
-        this.dateOfReturn = Optional.of(dateOfReturn);
+        this.getDateOfReturn().set(dateOfReturn);
     }
 
 
     public void countPenalty(Date date){
         Date finalDate;
-        if(dateOfReturn.isEmpty()) finalDate = date;
+        if(dateOfReturn.toOptional().isEmpty()) finalDate = date;
         else finalDate = dateOfReturn.get();
 
         Calendar calendar1 = Calendar.getInstance();
@@ -74,17 +75,17 @@ public class Rental{
             monthsDiff--;
         }
 
-        if(monthsDiff>0) penalty = Optional.of(monthsDiff*Utils.penaltyForMonth);
-        else penalty = Optional.empty();
+        if(monthsDiff>0) penalty.set(monthsDiff*Utils.penaltyForMonth);
+        else penalty.set(null);
     }
 
     @Override
     public String toString() {
         String dateOfReturntoString;
         String penaltyToString;
-        if(dateOfReturn.isEmpty()) dateOfReturntoString = "null";
+        if(dateOfReturn.toOptional().isEmpty()) dateOfReturntoString = "null";
         else dateOfReturntoString = dateOfReturn.toString();
-        if(penalty.isEmpty()) penaltyToString = "null";
+        if(penalty.toOptional().isEmpty()) penaltyToString = "null";
         else penaltyToString = penalty.toString();
         return "Rental{" +
                 "rentalNumber=" + rentalNumber +

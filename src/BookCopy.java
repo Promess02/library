@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-public class BookCopy extends Book{
+public class BookCopy extends Book implements Serializable {
         private Integer catalogNumber;
         private RentalStatus rentalStatus;
 

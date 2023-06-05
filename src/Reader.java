@@ -1,4 +1,6 @@
-public class Reader {
+import java.io.Serializable;
+
+public class Reader implements Serializable {
     private Integer ReaderId;
     private String name;
     private String surname;

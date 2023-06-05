@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Date;
 
-abstract public class Book{
+abstract public class Book implements Serializable {
     protected Integer isbn;
     protected String title;
     protected String publishingHouse;

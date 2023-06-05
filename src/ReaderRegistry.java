@@ -1,7 +1,9 @@
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ReaderRegistry implements Registry{
+public class ReaderRegistry implements Registry, Serializable {
+    private static final long serialVersionUID = 2L;
     private List<Reader> readerList;
 
     public ReaderRegistry(){

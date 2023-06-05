@@ -1,8 +1,10 @@
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BookCopyRegistry implements Registry{
+public class BookCopyRegistry implements Registry, Serializable {
+    private static final long serialVersionUID = 1L;
     private List<BookCopy> bookCopyList;
 
     public BookCopyRegistry() {
@@ -26,7 +28,7 @@ public class BookCopyRegistry implements Registry{
         }
         return copies;
     }
-    public LinkedList<BookCopy> getListOfCopiesGivenStatus(BookCategory bookCategory){
+    public LinkedList<BookCopy> getListOfCopiesGivenCategory(BookCategory bookCategory){
         LinkedList<BookCopy> copies = new LinkedList<>();
         for(BookCopy bookCopy: bookCopyList){
             if(bookCopy.getBookCategory().equals(bookCategory)) copies.add(bookCopy);

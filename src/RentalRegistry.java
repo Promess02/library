@@ -1,3 +1,5 @@
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -6,7 +8,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class RentalRegistry implements Registry{
+public class RentalRegistry implements Registry, Serializable {
+    @Serial
+    private static final long serialVersionUID = 3L;
     private List<Rental> rentalList;
 
     public RentalRegistry() {
@@ -18,20 +22,20 @@ public class RentalRegistry implements Registry{
     public Integer getNumberOfCurrentRentals(){
         int sum = 0;
         for(Rental rental: rentalList){
-            if(rental.getDateOfReturn().isEmpty()) sum++;
+            if(rental.getDateOfReturn().toOptional().isEmpty()) sum++;
         }
         return sum;
     }
 
     public Rental addRental(Reader reader, BookCopy bookCopy, Date dateOfRental, Optional<Date> dateOfReturn){
-        Rental rental = new Rental(rentalList.size()+1,reader,bookCopy,dateOfRental,dateOfReturn);
+        Rental rental = new Rental(rentalList.size()+1,reader,bookCopy,dateOfRental, dateOfReturn);
         rentalList.add(rental);
         return rental;
     }
 
     public void updateDateOfReturn(Integer rentalNumber, Date date){
         rentalList.stream()
-                .filter(rental -> rental.getRentalNumber().equals(rentalNumber) || rental.getDateOfReturn().isEmpty())
+                .filter(rental -> rental.getRentalNumber().equals(rentalNumber) || rental.getDateOfReturn().toOptional().isEmpty())
                 .findFirst()
                 .ifPresent(rental -> rental.setDateOfReturn(date));
     }
@@ -43,7 +47,7 @@ public class RentalRegistry implements Registry{
         Date dateNow = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
         for(Rental rental: rentalList){
             rental.countPenalty(dateNow);
-            if(rental.getPenalty().isPresent()) overdueRentals.add(rental);
+            if(rental.getPenalty().toOptional().isPresent()) overdueRentals.add(rental);
         }
         return overdueRentals;
     }
