@@ -185,7 +185,7 @@ public class Menu {
             readerId = checkIfRegistryContainsId(registryList.getReaderRegistry());
             System.out.println("Enter book copy id");
             bookCopyId = checkIfRegistryContainsId(registryList.getBookCopyRegistry());
-            System.out.println("Enter time of rental");
+            System.out.println("Enter time of rental (months), penalty: " + Utils.penaltyForMonth + "/month");
             timeOfRental = scanner.nextInt();
             rentalReader = registryList.getReaderRegistry().getEntryById(readerId);
             rentalBookCopy = registryList.getBookCopyRegistry().getEntryById(bookCopyId);
@@ -296,8 +296,8 @@ public class Menu {
             System.out.println("Enter rental Id");
             givenId = checkIfRegistryContainsId(registryList.getRentalRegistry());
             Rental rental = registryList.getRentalRegistry().getEntryById(givenId);
-            rental.countPenalty(rental.getDateOfReturn().get());
-            System.out.println(rental.getPenalty());
+            rental.countPenalty(rental.getDateOfReturnOptional().get());
+            System.out.println(rental.getPenaltyOptional().get());
         }catch (Exception e){
             System.out.println("invalid input");
         }

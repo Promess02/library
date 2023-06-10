@@ -13,21 +13,6 @@ public class SerializableOptional<T> implements Serializable {
         this.isPresent = optional.isPresent();
         this.value = optional.orElse(null);
     }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeBoolean(isPresent);
-        if (isPresent) {
-            out.writeObject(value);
-        }
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        isPresent = in.readBoolean();
-        if (isPresent) {
-            value = (T) in.readObject();
-        }
-    }
-
     public Optional<T> toOptional() {
         return isPresent ? Optional.ofNullable(value) : Optional.empty();
     }
@@ -37,6 +22,7 @@ public class SerializableOptional<T> implements Serializable {
     }
 
     public void set(T value) {
+        this.isPresent = true;
         this.value = value;
     }
 

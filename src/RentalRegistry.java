@@ -22,7 +22,7 @@ public class RentalRegistry implements Registry, Serializable {
     public Integer getNumberOfCurrentRentals(){
         int sum = 0;
         for(Rental rental: rentalList){
-            if(rental.getDateOfReturn().toOptional().isEmpty()) sum++;
+            if(rental.getDateOfReturnOptional().toOptional().isEmpty()) sum++;
         }
         return sum;
     }
@@ -37,14 +37,18 @@ public class RentalRegistry implements Registry, Serializable {
         rentalList.stream()
                 .filter(rental -> rental.getRentalNumber().equals(rentalNumber))
                 .findFirst()
-                .ifPresent(rental -> rental.setDateOfReturn(date));
+                .ifPresent(rental -> {
+                    rental.setDateOfReturn(date);
+                    rental.countPenalty(date);
+                });
+
     }
 
     public LinkedList<Rental> getListOfOverdueRentals(){
         LinkedList<Rental> overdueRentals = new LinkedList<>();
         for(Rental rental: rentalList){
-            rental.countPenalty(rental.getDateOfReturn().get());
-            if(rental.getPenalty().toOptional().isPresent()) overdueRentals.add(rental);
+            rental.countPenalty(rental.getDateOfReturnOptional().get());
+            if(rental.getPenaltyOptional().toOptional().isPresent()) overdueRentals.add(rental);
         }
         return overdueRentals;
     }

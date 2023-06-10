@@ -36,7 +36,7 @@ public class Rental implements Serializable {
         return reader;
     }
 
-    public SerializableOptional<Float> getPenalty() {
+    public SerializableOptional<Float> getPenaltyOptional() {
         return penalty;
     }
 
@@ -44,12 +44,12 @@ public class Rental implements Serializable {
         return dateOfRental;
     }
 
-    public SerializableOptional<Date> getDateOfReturn() {
+    public SerializableOptional<Date> getDateOfReturnOptional() {
         return dateOfReturn;
     }
 
     public void setDateOfReturn(Date dateOfReturn) {
-        this.getDateOfReturn().set(dateOfReturn);
+        this.dateOfReturn.set(dateOfReturn);
     }
 
 
@@ -83,7 +83,7 @@ public class Rental implements Serializable {
         }
 
         if(monthsDiff>timeOfRental) penalty.set((monthsDiff-timeOfRental)*Utils.penaltyForMonth);
-        else penalty.set(null);
+//        else penalty = new SerializableOptional<>(Optional.empty());
     }
 
     @Override
