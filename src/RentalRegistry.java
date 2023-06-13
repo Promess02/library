@@ -29,6 +29,11 @@ public class RentalRegistry implements Registry, Serializable {
 
     public Rental addRental(Reader reader, BookCopy bookCopy, Date dateOfRental, Integer timeOfRental){
         Rental rental = new Rental(rentalList.size()+1,reader,bookCopy,timeOfRental, dateOfRental);
+        if(rental.getBookCopy().getRentalStatus().equals(RentalStatus.RENTED)) {
+            System.out.println("Book copy not available");
+            return null;
+        }
+        bookCopy.setRentalStatus(RentalStatus.RENTED);
         rentalList.add(rental);
         return rental;
     }
@@ -39,6 +44,7 @@ public class RentalRegistry implements Registry, Serializable {
                 .findFirst()
                 .ifPresent(rental -> {
                     rental.setDateOfReturn(date);
+                    rental.getBookCopy().setRentalStatus(RentalStatus.AVAILABLE);
                     rental.countPenalty(date);
                 });
 

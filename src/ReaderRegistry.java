@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ReaderRegistry implements Registry, Serializable {
     private static final long serialVersionUID = 2L;
+
     private List<Reader> readerList;
 
     public ReaderRegistry(){
@@ -27,7 +28,9 @@ public class ReaderRegistry implements Registry, Serializable {
                 "readerList=" + readerList +
                 '}';
     }
-
+    public List<Reader> getReaderList() {
+        return readerList;
+    }
     @Override
     public Reader getEntryById(Integer readerId) {
         for(Reader reader: readerList)

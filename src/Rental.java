@@ -3,6 +3,9 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.Optional;
 
+/**
+ * Class for rentals, which implements the serializable interface
+ */
 public class Rental implements Serializable {
     final private Integer rentalNumber;
     final private Reader reader;
@@ -20,6 +23,8 @@ public class Rental implements Serializable {
         this.dateOfReturn = new SerializableOptional<>(Optional.empty());
         this.penalty = new SerializableOptional<>(Optional.empty());
     }
+
+
     public BookCopy getBookCopy() {
         return bookCopy;
     }
@@ -53,6 +58,12 @@ public class Rental implements Serializable {
     }
 
 
+    /**
+     * sets the penalty inside our Rental object
+     * counts it based on the difference in months between dateOfRental and dateOfReturn. Amount per month is set in Utils.penaltyForMonth
+     * @param date - if dateOfReturn inside the object is null then the function counts penalty based on this parameter
+     *
+     */
     public void countPenalty(Date date){
         Date finalDate;
         if(dateOfReturn.toOptional().isEmpty()) finalDate = date;
@@ -83,9 +94,13 @@ public class Rental implements Serializable {
         }
 
         if(monthsDiff>timeOfRental) penalty.set((monthsDiff-timeOfRental)*Utils.penaltyForMonth);
-//        else penalty = new SerializableOptional<>(Optional.empty());
+        else penalty = new SerializableOptional<>(Optional.empty());
     }
 
+
+    /**
+     * @return String - returns a string containing information about rental
+     */
     @Override
     public String toString() {
         String dateOfReturntoString;
