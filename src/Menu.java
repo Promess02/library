@@ -6,9 +6,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * This class represents a menu of the program.
+ */
 public class Menu {
     RegistryList registryList;
 
+    /**
+     * Class constructor.
+     * @param registryList - list of the registries.
+     * @throws IOException, ParseException
+     */
     public Menu(RegistryList registryList) throws IOException, ParseException {
         this.registryList = registryList;
         Scanner scanner = new Scanner(System.in);
@@ -78,6 +86,9 @@ public class Menu {
 
     }
 
+    /**
+     * Shows the list of the possible options in the main menu.
+     */
     private void showEnterPrompt() {
         System.out.println("Welcome to the library system. Use one of the following commands to make changes:");
         System.out.println("1. ReaderConfig - enter Reader config");
@@ -86,6 +97,9 @@ public class Menu {
         System.out.println("4. quit - exits the config modes and saves changes");
     }
 
+    /**
+     * Shows the list of the possible options in the reader config menu.
+     */
     private void showReaderConfigPrompt() {
         System.out.println("Welcome to Reader Registry config. Enter one of the following commands");
         System.out.println("1. showReaders - prints all readers");
@@ -98,6 +112,9 @@ public class Menu {
         System.out.println("8. quit - quits ReaderConfig");
     }
 
+    /**
+     * Shows the list of the possible options in the copy config menu.
+     */
     private void showBookCopyConfigPrompt() {
         System.out.println("Welcome to BookCopy Registry config. Enter one of the following commands");
         System.out.println("1. showBookCopies - prints all book copies");
@@ -109,6 +126,9 @@ public class Menu {
         System.out.println("7. quit - quits BookCopyConfig");
     }
 
+    /**
+     * Shows the list of the possible options in the rentals' config menu.
+     */
     private void showRentalsConfigPrompt() {
         System.out.println("Welcome to Rentals Registry config. Enter one of the following commands");
         System.out.println("1. showRentals - prints all Rentals");
@@ -120,6 +140,9 @@ public class Menu {
         System.out.println("7. quit - quits RentalsConfig");
     }
 
+    /**
+     * Shows the interactive menu which helps read the data about reader which is added to the registry.
+     */
     private void addReader() {
         String name, surname, login, password;
         Scanner scanner = new Scanner(System.in);
@@ -138,6 +161,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps read the data about book copy which is added to the registry.
+     * @throws ParseException
+     */
     private void addBookCopy() throws ParseException {
         String title, publishingHouse, bookAuthor, rentalStatus, bookCategory, publishingDate;
         Scanner scanner = new Scanner(System.in);
@@ -175,6 +202,9 @@ public class Menu {
                 Utils.parseDate(publishingDate), bookAuthor, RentalStatus.valueOf(rentalStatus), BookCategory.valueOf(bookCategory));
     }
 
+    /**
+     * Shows the interactive menu which helps read the data about rental which is added to the registry.
+     */
     private void addRental() {
 
         Scanner scanner = new Scanner(System.in);
@@ -197,6 +227,10 @@ public class Menu {
 
     }
 
+    /**
+     * Checks if given string is a valid rental status value.
+     * @return boolean
+     */
     private boolean checkIfStringInputEqualsRentalStatusValue(String string) {
         for (RentalStatus rentalStatus : RentalStatus.values()) {
             if (string.equals(rentalStatus.name())) return true;
@@ -204,6 +238,10 @@ public class Menu {
         return false;
     }
 
+    /**
+     * Checks if given string is a valid book category value.
+     * @return boolean
+     */
     private boolean checkIfStringInputEqualsBookCategoryValue(String string) {
         for (BookCategory bookCategory : BookCategory.values()) {
             if (string.equals(bookCategory.name())) return true;
@@ -211,6 +249,9 @@ public class Menu {
         return false;
     }
 
+    /**
+     * Shows the interactive menu which helps user change password of a reader.
+     */
     private void updatePassword() {
         Integer givenID;
         String oldPassword, newPassword;
@@ -237,6 +278,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user change update date of return in rental registry.
+     */
     private void updateDateOfReturn() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -255,6 +299,9 @@ public class Menu {
 
     }
 
+    /**
+     * Shows the interactive menu which helps user view data of a reader with specific ID.
+     */
     private void showReader() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -267,6 +314,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user view data of a book copy with specific ID.
+     */
     private void showBookCopy() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -279,6 +329,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user view data of a rental with specific ID.
+     */
     private void showRental() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -291,6 +344,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user view penalty of a rental with specific ID.
+     */
     private void showPenalty() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -305,6 +361,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user remove a reader with specific ID.
+     */
     private void deleteReader() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -318,6 +377,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user remove a book copy with specific ID.
+     */
     private void deleteBookCopy() {
         Integer givenId;
         Scanner scanner = new Scanner(System.in);
@@ -331,6 +393,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Saves registry list in "registries.txt" file.
+     * @throws IOException
+     */
     private void saveRegistryList() throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream("registries.txt"); //todo() try catch
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -339,6 +405,11 @@ public class Menu {
         objectOutputStream.close();
     }
 
+    /**
+     * Shows the interactive menu which helps user check if specific ID is in the given registry.
+     * @param registry - Registry object
+     * @return Integer
+     */
     private Integer checkIfRegistryContainsId(Registry registry) {
         Integer givenID;
         Scanner scanner = new Scanner(System.in);
@@ -352,6 +423,9 @@ public class Menu {
         return givenID;
     }
 
+    /**
+     * Shows the interactive menu which helps user view book copies with given status.
+     */
     private void showBookCopiesGivenStatus() {
         String rentalStatus;
         Scanner scanner = new Scanner(System.in);
@@ -368,6 +442,9 @@ public class Menu {
         System.out.println(registryList.getBookCopyRegistry().getListOfCopiesGivenStatus(RentalStatus.valueOf(rentalStatus)));
     }
 
+    /**
+     * Shows the interactive menu which helps user view book copies with given book category.
+     */
     private void showBookCopiesGivenCategory() {
         String bookCategory;
         Scanner scanner = new Scanner(System.in);
@@ -384,6 +461,9 @@ public class Menu {
         System.out.println(registryList.getBookCopyRegistry().getListOfCopiesGivenCategory(BookCategory.valueOf(bookCategory)));
     }
 
+    /**
+     * Views information about rented books by all of the readers.
+     */
     public void showReadersBooks() {
         List<Reader> listOfReaders = registryList.getReaderRegistry().getReaderList();
         List<Rental> listOfRentals = registryList.getRentalRegistry().getRentalList();
@@ -401,6 +481,9 @@ public class Menu {
         }
     }
 
+    /**
+     * Shows the interactive menu which helps user view books rented by a specific reader.
+     */
     public void showReaderBooks() {
         List<Rental> listOfRentals = registryList.getRentalRegistry().getRentalList();
         List<BookCopy> listOfBooks = new LinkedList<>();
@@ -413,6 +496,7 @@ public class Menu {
             System.out.println("invalid input");
             return;
         }
+
 
         Reader reader = registryList.getReaderRegistry().getEntryById(readerID);
         for (Rental rental : listOfRentals)

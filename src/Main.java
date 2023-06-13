@@ -3,7 +3,15 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+* Main class of the program.
+*/
 public class Main {
+
+    /**
+     * Entry point of the program.
+     * @param args - program arguments
+     */
     public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
         Date dateNow = Utils.getDateNow();
         RegistryList registries = new RegistryList(new ArrayList<>());
