@@ -15,7 +15,8 @@ public class Menu {
     /**
      * Class constructor.
      * @param registryList - list of the registries.
-     * @throws IOException, ParseException
+     * @throws IOException
+     * @throws ParseException
      */
     public Menu(RegistryList registryList) throws IOException, ParseException {
         this.registryList = registryList;

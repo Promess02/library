@@ -78,6 +78,7 @@ public class Rental implements Serializable {
     }
 
     /**
+     * returns SerializableOptional of Float object being the penalty for rental
      * @return SerializableOptional penalty for overdue rental
      * @see SerializableOptional
      */
@@ -86,6 +87,7 @@ public class Rental implements Serializable {
     }
 
     /**
+     * Returns java.util.Date object of Date in which the rental happened
      * @return Returns Date object in which the rental happened
      */
     public Date getDateOfRental() {
@@ -93,6 +95,7 @@ public class Rental implements Serializable {
     }
 
     /**
+     * Returns SerializableOptional object of java.util.Date object being the date of Return
      * @return SerializableOptional of return date of the book
      * @see SerializableOptional
      */
@@ -160,11 +163,11 @@ public class Rental implements Serializable {
         else penaltyToString = penalty.toString();
         return "Rental:" +
                 "rentalNumber=" + rentalNumber +
-                ", \nreader=" + reader +
-                ", \nbookCopy=" + bookCopy +
-                ", \ndateOfRental=" + dateOfRental +
-                ", dateOfReturn=" + dateOfReturntoString +
-                ", penalty=" + penaltyToString +
-                '}';
+                "\nreader=" + reader +
+                "\nbookCopy=" + bookCopy +
+                "\ndateOfRental=" + dateOfRental +
+                "\n dateOfReturn=" + dateOfReturntoString +
+                "\n penalty=" + penaltyToString +
+                '\n';
     }
 }

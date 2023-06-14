@@ -6,7 +6,7 @@ import java.io.Serializable;
  */
 public interface Registry<T> extends Serializable{
     /**
-     *
+     *Gets entry by id
      * @param id entry id
      * @return object which the registry is containing
      */

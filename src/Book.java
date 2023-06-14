@@ -5,11 +5,27 @@ import java.util.Date;
  * Abstract class of Book
  */
 abstract public class Book implements Serializable {
+    /**
+     * book title
+     */
     protected String title;
+    /**
+     * publishing House that published the book
+     */
     protected String publishingHouse;
+    /**
+     * Date of which the book was published
+     */
     protected Date publishingDate;
+    /**
+     * Books author
+     */
     protected String bookAuthor;
 
+    /**
+     * Enum object of class BookCategory
+     * @see BookCategory
+     */
     protected BookCategory bookCategory;
 
 

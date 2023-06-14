@@ -11,6 +11,9 @@ public class Main {
     /**
      * Entry point of the program.
      * @param args - program arguments
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws ParseException
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
         Date dateNow = Utils.getDateNow();

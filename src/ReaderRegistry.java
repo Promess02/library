@@ -47,14 +47,14 @@ public class ReaderRegistry implements Registry, Serializable {
      */
     @Override
     public String toString() {
-        return "ReaderRegistry{" +
+        return "ReaderRegistry: " +
                 "readerList=" + readerList +
-                '}';
+                '\n';
     }
 
     /**
      * Returns a list of all readers in registry.
-     * @return List<Reader>
+     * @return List of Readers
      */
     public List<Reader> getReaderList() {
         return readerList;

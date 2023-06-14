@@ -104,12 +104,12 @@ public class Reader implements Serializable {
      */
     @Override
     public String toString() {
-        return "Reader{" +
+        return "Reader: " +
                 "ReaderId=" + ReaderId +
                 ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+                ", surname='" + surname + '\n' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                '}';
+                '\n';
     }
 }

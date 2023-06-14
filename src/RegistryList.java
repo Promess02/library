@@ -20,6 +20,7 @@ public class RegistryList implements Serializable {
     }
 
     /**
+     * returns a list of registries
      * @return list of registries
      */
     public List<Registry> getRegistryList() {
@@ -63,7 +64,7 @@ public class RegistryList implements Serializable {
 
     /**
      * sets the rental registry at index 0 of the list
-     * @param rentalRegistry
+     * @param rentalRegistry rental registry object
      * @see RentalRegistry
      */
     public void setRentalRegistry(RentalRegistry rentalRegistry){
@@ -71,18 +72,25 @@ public class RegistryList implements Serializable {
     }
     /**
      * sets the rental registry at index 1 of the list
-     * @param readerRegistry
+     * @param readerRegistry Reader Registry object
      * @see ReaderRegistry
      */
     public void setReaderRegistry(ReaderRegistry readerRegistry){
         this.registryList.add(1, readerRegistry);
     }
+
     /**
      * sets the book copy registry at index 2 of the list
-     * @param bookCopyRegistry
+     * @param bookCopyRegistry BookCopyRegistry object
      * @see BookCopyRegistry
      */
     public void setBookCopyRegistry(BookCopyRegistry bookCopyRegistry){
         this.registryList.add(2, bookCopyRegistry);
+    }
+    @Override
+    public String toString() {
+        return "RegistryList: " +
+                "registryList=" + registryList +
+                '\n';
     }
 }

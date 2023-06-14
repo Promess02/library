@@ -112,9 +112,9 @@ public class RentalRegistry implements Registry, Serializable {
      */
     @Override
     public String toString() {
-        return "RentalRegistry{" +
+        return "RentalRegistry: " +
                 "rentalList=" + rentalList +
-                '}';
+                '\n';
     }
 
     /**

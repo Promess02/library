@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -117,8 +118,9 @@ public class BookCopyRegistry implements Registry, Serializable {
      */
     @Override
     public String toString() {
-        return "BookCopyRegistry{" +
+        return "BookCopyRegistry: " +
                 "bookCopyList=" + bookCopyList +
-                '}';
+                '\n';
     }
+
 }

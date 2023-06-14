@@ -10,12 +10,18 @@ import java.util.Optional;
  */
 public class SerializableOptional<T> implements Serializable {
 
+    /**
+     * boolean that signalizes if the Optional contains a value
+     */
     private boolean isPresent;
+    /**
+     * Value that is contained within the object
+     */
     private T value;
 
     /**
      * Sets the value and isPresent variables based on given optional
-     * @param optional
+     * @param optional Optional of parameter T
      */
     public SerializableOptional(Optional<T> optional) {
         this.isPresent = optional.isPresent();

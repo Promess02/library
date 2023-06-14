@@ -6,6 +6,10 @@ import java.util.Date;
  */
 public class BookCopy extends Book implements Serializable {
         private Integer catalogNumber;
+        /**
+         * Enum object of class RentalStatus
+         * @see RentalStatus
+         */
         private RentalStatus rentalStatus;
 
         /**
@@ -14,15 +18,15 @@ public class BookCopy extends Book implements Serializable {
          */
         @Override
         public String toString() {
-                return "BookCopy{" +
+                return "BookCopy: " +
                         "catalogNumber=" + catalogNumber +
                         ", rentalStatus=" + rentalStatus +
-                        ", title='" + title + '\'' +
+                        "\n title='" + title + '\'' +
                         ", publishingHouse='" + publishingHouse + '\'' +
-                        ", publishingDate=" + publishingDate +
+                        "\n publishingDate=" + publishingDate +
                         ", bookAuthor='" + bookAuthor + '\'' +
                         ", bookCategory=" + bookCategory +
-                        '}';
+                        '\n';
         }
 
         /**
