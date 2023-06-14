@@ -85,7 +85,8 @@ abstract public class Book implements Serializable {
      * @param bookAuthor - author of the book
      * @param bookCategory - category of the book enum type of values (FANTASY, HORROR, SCIENCE_FICTION, ROMANCE, BIOGRAPHY, SCIENCE, ART)
      */
-    public Book(String title, String publishingHouse, Date publishingDate, String bookAuthor, BookCategory bookCategory) {
+    public Book(String title, String publishingHouse,
+                Date publishingDate, String bookAuthor, BookCategory bookCategory) {
         this.title = title;
         this.publishingHouse = publishingHouse;
         this.publishingDate = publishingDate;

@@ -33,7 +33,8 @@ public class Rental implements Serializable {
      * @see Reader
      * @see BookCopy
      */
-    public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy, Integer timeOfRental, Date dateOfRental) {
+    public Rental(Integer rentalNumber, Reader reader, BookCopy bookCopy,
+                  Integer timeOfRental, Date dateOfRental) {
         this.rentalNumber = rentalNumber;
         this.reader = reader;
         this.bookCopy = bookCopy;

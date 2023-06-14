@@ -34,7 +34,9 @@ public class Reader implements Serializable {
      * @param login - reader's login
      * @param password - reader's password
      */
-    public Reader(Integer readerId, String name, String surname, String login, String password) {
+    public Reader(Integer readerId, String name,
+                  String surname, String login,
+                  String password) {
         ReaderId = readerId;
         this.name = name;
         this.surname = surname;

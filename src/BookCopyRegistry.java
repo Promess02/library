@@ -12,7 +12,8 @@ public class BookCopyRegistry implements Registry, Serializable {
     private List<BookCopy> bookCopyList;
 
     /**
-     * Default constructor that initiates BookCopyList with a new instance of linked list
+     * Default constructor that initiates
+     * BookCopyList with a new instance of linked list
      */
     public BookCopyRegistry() {
         bookCopyList = new LinkedList<>();

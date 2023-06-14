@@ -63,7 +63,10 @@ public class BookCopy extends Book implements Serializable {
          * @param rentalStatus - rental status of the book of the book (enum object - ORDERED, RENTED, AVAILABLE)
          * @param bookCategory - category og the book enum type of values (FANTASY, HORROR, SCIENCE_FICTION, ROMANCE, BIOGRAPHY, SCIENCE, ART)
          */
-        public BookCopy(String title, String publishingHouse, Date publishingDate, String bookAuthor, Integer catalogNumber, RentalStatus rentalStatus, BookCategory bookCategory) {
+        public BookCopy(String title, String publishingHouse,
+                        Date publishingDate, String bookAuthor,
+                        Integer catalogNumber, RentalStatus rentalStatus,
+                        BookCategory bookCategory) {
                 super(title, publishingHouse, publishingDate, bookAuthor, bookCategory);
                 this.catalogNumber = catalogNumber;
                 this.rentalStatus = rentalStatus;

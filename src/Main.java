@@ -16,7 +16,6 @@ public class Main {
      * @throws ParseException
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException, ParseException {
-        Date dateNow = Utils.getDateNow();
         RegistryList registries = new RegistryList(new ArrayList<>());
         //The 3 registries used in the program
         RentalRegistry rentalRegistry;
@@ -24,13 +23,13 @@ public class Main {
         ReaderRegistry readerRegistry;
 
         FileInputStream fileInputStream = new FileInputStream("registries.txt");
-        ObjectInputStream objectInputStream;
-        System.out.println(fileInputStream.available());
+        if(fileInputStream.available()>0) System.out.println("found data");
+        else System.out.println("data not found");
 
+        ObjectInputStream objectInputStream;
         if(fileInputStream.available()>0){
             objectInputStream = new ObjectInputStream(fileInputStream);
             registries = (RegistryList) objectInputStream.readObject();
-
             objectInputStream.close();
         }
         else{
@@ -41,9 +40,8 @@ public class Main {
             registries.setRentalRegistry(rentalRegistry);
             registries.setReaderRegistry(readerRegistry);
             registries.setBookCopyRegistry(bookCopyRegistry);
-
         }
-        Menu menu = new Menu(registries);
+        new Menu(registries);
 
     }
 }

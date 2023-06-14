@@ -84,7 +84,6 @@ public class Menu {
             }
         }
         saveRegistryList();
-
     }
 
     /**
@@ -398,12 +397,16 @@ public class Menu {
      * Saves registry list in "registries.txt" file.
      * @throws IOException
      */
-    private void saveRegistryList() throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("registries.txt"); //todo() try catch
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(registryList);
-        objectOutputStream.flush();
-        objectOutputStream.close();
+    private void saveRegistryList(){
+        try{
+            FileOutputStream fileOutputStream = new FileOutputStream("registries.txt");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(registryList);
+            objectOutputStream.flush();
+            objectOutputStream.close();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     /**
